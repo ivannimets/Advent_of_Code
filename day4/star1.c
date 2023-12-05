@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 
 int main() {
@@ -11,6 +12,7 @@ int main() {
     int p, i, j;
     int win[25];
     int cur[35];
+    int res = 0;
     char line[250];
     char ch = getc(input);
     while (ch != EOF) {
@@ -46,6 +48,19 @@ int main() {
             cur[j] = atoi(num);
             j++;
         }
+        int local_res = 0;
+        i = 0;
+        while (win[i] != 0) {
+            j = 0;
+            while (cur[j] != 0){
+                if (cur[j] == win[i]){
+                    local_res++;
+                }
+                j++;
+            }
+            i++;
+        }
+        res = res + pow(2, local_res - 1);
         // p = 0;
         // printf("wins : ");
         // while (win[p] != 0) {
@@ -61,7 +76,7 @@ int main() {
         // printf("\n");
         ch = getc(input);
     }
-    printf("\n\n\n       ------------ Result =  -----------");
+    printf("\n\n\n       ------------ Result = %i -----------", res);
     fclose(input);
 
     return 0;
